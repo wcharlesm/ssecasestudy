@@ -9,6 +9,7 @@ namespace SseCaseStudy.EventModels
     {
         public String UserId { get; set; }
         public String SearchTerm { get; set; }
+        public String SearchType { get; set; }
         public DateTime TimeStamp { get; set; }
     }
 }

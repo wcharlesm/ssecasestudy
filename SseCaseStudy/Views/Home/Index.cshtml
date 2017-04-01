@@ -13,23 +13,23 @@
                 @Html.DropDownList("SearchType", new List<SelectListItem> {
                     new SelectListItem {
                         Text = "Songs",
-                        Value = "song"
+                        Value = "Songs"
                     },
                     new SelectListItem {
                         Text = "Music Videos",
-                        Value = "musicVideo"
+                        Value = "Music Videos"
                     },
                     new SelectListItem {
                         Text = "Movies",
-                        Value = "movie"
+                        Value = "Movies"
                     },
                     new SelectListItem {
                         Text = "TV Shows",
-                        Value = "tvSeason"
+                        Value = "TV Shows"
                     },
                     new SelectListItem {
                         Text = "Software",
-                        Value = "software"
+                        Value = "Software"
                     }
                 })
             </h3>
@@ -37,9 +37,15 @@
         }
 
         <ul>
-            @foreach (SongSearchResult song in Model)
+            @foreach (SearchResultDisplay result in Model)
             {
-                <li><a href="@song.TrackViewUrl">@song.TrackName by @song.ArtistName</a></li>
+                <dl>
+                    <dt><a href="@result.Link">@result.Title</a></dt>
+                    @foreach (String description in result.DetailedDescription) { 
+                        <dd>@description</dd>
+                    }
+                    <dd>@result.Price</dd>
+                </dl>
             }
         </ul>
 

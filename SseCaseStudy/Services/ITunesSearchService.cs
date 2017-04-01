@@ -18,39 +18,79 @@ namespace SseCaseStudy.Services
             _restClient.BaseUrl = new System.Uri("https://itunes.apple.com");
         }
 
-        public async Task<List<SongSearchResult>> GetMovies(string searchTerm)
+        public async Task<List<SearchResultDisplay>> GetMovies(string searchTerm)
         {
-            var results = await SearchITunes<SongSearchResult>(searchTerm, "movie");
+            var results = await SearchITunes<SearchResult>(searchTerm, "movie");
 
-            return results;
+            return results.Select(x => new SearchResultDisplay {
+                ResourseId = x.TrackId,
+                Title = x.TrackName,
+                Link = x.TrackViewUrl,
+                Price = $"${x.TrackPrice}",
+                DetailedDescription = new List<String> { x.LongDescription }
+            }).ToList();
         }
 
-        public async Task<List<SongSearchResult>> GetMusicVideos(string searchTerm)
+        public async Task<List<SearchResultDisplay>> GetMusicVideos(string searchTerm)
         {
-            var results = await SearchITunes<SongSearchResult>(searchTerm, "musicVideo");
+            var results = await SearchITunes<SearchResult>(searchTerm, "musicVideo");
 
-            return results;
+            return results.Select(x => new SearchResultDisplay
+            {
+                ResourseId = x.TrackId,
+                Title = $"{x.TrackName} by {x.ArtistName}",
+                Link = x.TrackViewUrl,
+                Price = $"${x.TrackPrice}",
+                DetailedDescription = new List<string>()
+            }).ToList();
         }
 
-        public async Task<List<SongSearchResult>> GetSoftware(string searchTerm)
+        public async Task<List<SearchResultDisplay>> GetSoftware(string searchTerm)
         {
-            var results = await SearchITunes<SongSearchResult>(searchTerm, "software");
+            var results = await SearchITunes<SearchResult>(searchTerm, "software");
 
-            return results;
+            return results.Select(x => new SearchResultDisplay
+            {
+                ResourseId = x.TrackId,
+                Title = x.TrackName,
+                Link = x.TrackViewUrl,
+                Price = x.FormattedPrice,
+                DetailedDescription = new List<String> {
+                    x.Description,
+                    //devices are returned as a list of strings in formate "devicename-devicename"
+                    //null check devices since I don't know if that field is always returned
+                    //then split names on the -, taking the first result and aggregating them with a comma and a space between for readability
+                    x.SupportedDevices?.Aggregate("Supported Devices: ", (acc, device) => $"{acc}{device.Split('-').First()}, ") 
+                }
+            }).ToList();
         }
 
-        public async Task<List<SongSearchResult>> GetSongs(string searchTerm)
+        public async Task<List<SearchResultDisplay>> GetSongs(string searchTerm)
         {
-            var results = await SearchITunes<SongSearchResult>(searchTerm, "song");
+            var results = await SearchITunes<SearchResult>(searchTerm, "song");
 
-            return results;
+            return results.Select(x => new SearchResultDisplay
+            {
+                ResourseId = x.TrackId,
+                Title = $"{x.TrackName} by {x.ArtistName}",
+                Link = x.TrackViewUrl,
+                Price = $"${x.TrackPrice}",
+                DetailedDescription = new List<string>()
+            }).ToList();
         }
 
-        public async Task<List<SongSearchResult>> GetTvShowsBySeason(string searchTerm)
+        public async Task<List<SearchResultDisplay>> GetTvShowsBySeason(string searchTerm)
         {
-            var results = await SearchITunes<SongSearchResult>(searchTerm, "tvSeason");
+            var results = await SearchITunes<SearchResult>(searchTerm, "tvSeason");
 
-            return results;
+            return results.Select(x => new SearchResultDisplay
+            {
+                ResourseId = x.TrackId,
+                Title = x.CollectionName,
+                Link = x.TrackViewUrl,
+                Price = $"${x.CollectionPrice}",
+                DetailedDescription = new List<String> { x.LongDescription }
+            }).ToList();
         }
 
         private async Task<List<ResultType>> SearchITunes<ResultType>(string searchTerm, string entityType)

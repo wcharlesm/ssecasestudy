@@ -8,10 +8,10 @@ namespace SseCaseStudy.Services
 {
     public interface IMediaSearchService
     {
-        Task<List<SongSearchResult>> GetMovies(String searchTerm);
-        Task<List<SongSearchResult>> GetMusicVideos(String searchTerm);
-        Task<List<SongSearchResult>> GetSoftware(String searchTerm);
-        Task<List<SongSearchResult>> GetSongs(String searchTerm);
-        Task<List<SongSearchResult>> GetTvShowsBySeason(String searchTerm);
+        Task<List<SearchResultDisplay>> GetMovies(String searchTerm);
+        Task<List<SearchResultDisplay>> GetMusicVideos(String searchTerm);
+        Task<List<SearchResultDisplay>> GetSoftware(String searchTerm);
+        Task<List<SearchResultDisplay>> GetSongs(String searchTerm);
+        Task<List<SearchResultDisplay>> GetTvShowsBySeason(String searchTerm);
     }
 }

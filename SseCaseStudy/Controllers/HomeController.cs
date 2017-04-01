@@ -14,23 +14,23 @@ namespace SseCaseStudy.Controllers
     public class HomeController : Controller
     {
         private IEventService _eventService;
-        private IMediaSearchService _songSearchService;
+        private IMediaSearchService _searchService;
 
         public HomeController(IEventService eventService, IMediaSearchService songSearchService)
         {
             _eventService = eventService;
-            _songSearchService = songSearchService;
+            _searchService = songSearchService;
             
         }
 
         [IdFilter]
-        public async Task<IActionResult> Index(string searchTerm)
+        public async Task<IActionResult> Index(string searchTerm, string searchType)
         {
             var id = this.HttpContext.Request.Cookies["ssecasestudycookie"];
 
             if (String.IsNullOrEmpty(searchTerm))
             {
-                return View(new List<SongSearchResult>());
+                return View(new List<SearchResult>());
             }
             else
             {
@@ -39,11 +39,41 @@ namespace SseCaseStudy.Controllers
                 {
                     UserId = id,
                     SearchTerm = searchTerm,
+                    SearchType = searchType,
                     TimeStamp = DateTime.Now
                 });
 
-                var songs = await _songSearchService.GetSongs(searchTerm);
-                return View(songs);
+                List<SearchResultDisplay> results;
+
+                switch (searchType)
+                {
+                    case "Songs":
+                        results = await _searchService.GetSongs(searchTerm);
+                        break;
+
+                    case "Music Videos":
+                        results = await _searchService.GetMusicVideos(searchTerm);
+                        break;
+
+                    case "Movies":
+                        results = await _searchService.GetMovies(searchTerm);
+                        break;
+
+                    case "TV Shows":
+                        results = await _searchService.GetTvShowsBySeason(searchTerm);
+                        break;
+
+                    case "Software":
+                        results = await _searchService.GetSoftware(searchTerm);
+                        break;
+
+                    default:
+                        results = await _searchService.GetSongs(searchTerm);
+                        break;
+
+                }
+
+                return View(results);
             }
         }
 
