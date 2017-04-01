@@ -31,7 +31,7 @@ namespace SseCaseStudy.Services
   
             var response = await taskCompletion.Task;
 
-            return response.Data.results;
+            return response.Data.Results;
         }
     }
 }

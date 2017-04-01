@@ -7,9 +7,9 @@ namespace SseCaseStudy.Models
 {
     public class SongSearchResult
     {
-        public String artistName { get; set; }
-        public String collectionName { get; set; }
-        public String trackName { get; set; }
-        public String trackViewUrl { get; set; }
+        public String ArtistName { get; set; }
+        public String CollectionName { get; set; }
+        public String TrackName { get; set; }
+        public String TrackViewUrl { get; set; }
     }
 }

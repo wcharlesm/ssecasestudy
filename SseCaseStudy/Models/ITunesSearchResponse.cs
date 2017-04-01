@@ -7,6 +7,6 @@ namespace SseCaseStudy.Models
 {
     public class ITunesSearchResponse
     {
-        public List<SongSearchResult> results { get; set; }
+        public List<SongSearchResult> Results { get; set; }
     }
 }
