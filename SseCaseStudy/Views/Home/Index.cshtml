@@ -1,0 +1,25 @@
+﻿@using SseCaseStudy.Models
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm())
+        {
+            <h3>
+                @Html.TextBox("SearchTerm")
+                <input type="submit" value="Search" />
+            </h3>
+
+        }
+
+        <ul>
+            @foreach (SongSearchResult song in Model)
+            {
+                <li><a href="@song.trackViewUrl">@song.trackName by @song.artistName</a></li>
+            }
+        </ul>
+
+    </div>
+</div>
