@@ -10,6 +10,28 @@
             <h3>
                 @Html.TextBox("SearchTerm")
                 <input type="submit" value="Search" />
+                @Html.DropDownList("SearchType", new List<SelectListItem> {
+                    new SelectListItem {
+                        Text = "Songs",
+                        Value = "song"
+                    },
+                    new SelectListItem {
+                        Text = "Music Videos",
+                        Value = "musicVideo"
+                    },
+                    new SelectListItem {
+                        Text = "Movies",
+                        Value = "movie"
+                    },
+                    new SelectListItem {
+                        Text = "TV Shows",
+                        Value = "tvSeason"
+                    },
+                    new SelectListItem {
+                        Text = "Software",
+                        Value = "software"
+                    }
+                })
             </h3>
 
         }

@@ -34,7 +34,7 @@ namespace SseCaseStudy
 
             services.AddTransient<IRestClient, RestClient>();
             services.AddTransient<IEventService, EventService>();
-            services.AddTransient<ISongSearchService, ITunesSongSearchService>();
+            services.AddTransient<IMediaSearchService, ITunesSearchService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

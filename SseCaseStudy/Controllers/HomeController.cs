@@ -14,9 +14,9 @@ namespace SseCaseStudy.Controllers
     public class HomeController : Controller
     {
         private IEventService _eventService;
-        private ISongSearchService _songSearchService;
+        private IMediaSearchService _songSearchService;
 
-        public HomeController(IEventService eventService, ISongSearchService songSearchService)
+        public HomeController(IEventService eventService, IMediaSearchService songSearchService)
         {
             _eventService = eventService;
             _songSearchService = songSearchService;

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace SseCaseStudy.Models
 {
-    public class ITunesSearchResponse
+    public class ITunesSearchResponse<ResultType>
     {
-        public List<SongSearchResult> Results { get; set; }
+        public List<ResultType> Results { get; set; }
     }
 }
