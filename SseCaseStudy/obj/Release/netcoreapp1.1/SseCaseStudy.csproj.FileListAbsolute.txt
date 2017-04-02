@@ -1,0 +1,8 @@
+C:\Users\William\Documents\Visual Studio 2017\Projects\SseCaseStudy\SseCaseStudy\bin\Release\netcoreapp1.1\SseCaseStudy.deps.json
+C:\Users\William\Documents\Visual Studio 2017\Projects\SseCaseStudy\SseCaseStudy\bin\Release\netcoreapp1.1\SseCaseStudy.runtimeconfig.json
+C:\Users\William\Documents\Visual Studio 2017\Projects\SseCaseStudy\SseCaseStudy\bin\Release\netcoreapp1.1\SseCaseStudy.runtimeconfig.dev.json
+C:\Users\William\Documents\Visual Studio 2017\Projects\SseCaseStudy\SseCaseStudy\bin\Release\netcoreapp1.1\SseCaseStudy.dll
+C:\Users\William\Documents\Visual Studio 2017\Projects\SseCaseStudy\SseCaseStudy\bin\Release\netcoreapp1.1\SseCaseStudy.pdb
+C:\Users\William\Documents\Visual Studio 2017\Projects\SseCaseStudy\SseCaseStudy\obj\Release\netcoreapp1.1\SseCaseStudy.AssemblyInfo.cs
+C:\Users\William\Documents\Visual Studio 2017\Projects\SseCaseStudy\SseCaseStudy\obj\Release\netcoreapp1.1\SseCaseStudy.dll
+C:\Users\William\Documents\Visual Studio 2017\Projects\SseCaseStudy\SseCaseStudy\obj\Release\netcoreapp1.1\SseCaseStudy.pdb

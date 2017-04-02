@@ -1,0 +1,53 @@
+﻿@using SseCaseStudy.Models
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm())
+        {
+            <h3>
+                @Html.TextBox("SearchTerm")
+                <input type="submit" value="Search" />
+                @Html.DropDownList("SearchType", new List<SelectListItem> {
+                    new SelectListItem {
+                        Text = "Songs",
+                        Value = "Songs"
+                    },
+                    new SelectListItem {
+                        Text = "Music Videos",
+                        Value = "Music Videos"
+                    },
+                    new SelectListItem {
+                        Text = "Movies",
+                        Value = "Movies"
+                    },
+                    new SelectListItem {
+                        Text = "TV Shows",
+                        Value = "TV Shows"
+                    },
+                    new SelectListItem {
+                        Text = "Software",
+                        Value = "Software"
+                    }
+                })
+            </h3>
+
+        }
+
+        <ul>
+            @foreach (SearchResultDisplay result in Model)
+            {
+                <dl>
+                    <dt><a href="@result.Link">@result.Title</a></dt>
+                    @foreach (String description in result.DetailedDescription) { 
+                        <dd>@description</dd>
+                    }
+                    <dd>@result.Price</dd>
+                </dl>
+            }
+        </ul>
+
+    </div>
+</div>
