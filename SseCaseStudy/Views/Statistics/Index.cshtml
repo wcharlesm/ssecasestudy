@@ -1,0 +1,21 @@
+﻿@using SseCaseStudy.Models.ViewModels
+@model StatisticsViewModel
+@{
+    ViewData["Title"] = "Statistics Page";
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+        <ul>
+            <li>Total Click Count <span class="badge">@Model.ClickStatistics.TotalClicks</span></li>
+            <li>Clicks by Search Order: 
+                <ul>
+                    @foreach (var clickCount in Model.ClickStatistics.ClicksBySearchOrder) { 
+                        <li>Search Order @clickCount.Key: <span class="badge">@clickCount.Value clicks</span></li>
+                    }
+                    <li>Lower Search Order Clicks: <span class="badge">@Model.ClickStatistics.LeftOverClicks </span></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
