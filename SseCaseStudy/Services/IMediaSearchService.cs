@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SseCaseStudy.Models;
+using SseCaseStudy.Models.ViewModels;
 
 namespace SseCaseStudy.Services
 {

@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SseCaseStudy.ActionFilters;
-using SseCaseStudy.EventModels;
-using SseCaseStudy.Models;
+using SseCaseStudy.Models.EventModels;
+using SseCaseStudy.Models.ITunesSearchModels;
+using SseCaseStudy.Models.ViewModels;
 using SseCaseStudy.Services;
 
 namespace SseCaseStudy.Controllers
@@ -30,14 +31,18 @@ namespace SseCaseStudy.Controllers
 
             if (String.IsNullOrEmpty(searchTerm))
             {
-                return View(new List<SearchResult>());
+                return View(new HomeViewModel {
+                    SearchResults = new List<SearchResultDisplay>()
+                });
             }
             else
             {
+                var searchId = Guid.NewGuid().ToString();
 
                 _eventService.RecordSearchEvent(new SearchEvent
                 {
                     UserId = id,
+                    SearchId = searchId,
                     SearchTerm = searchTerm,
                     SearchType = searchType,
                     TimeStamp = DateTime.Now
@@ -73,7 +78,10 @@ namespace SseCaseStudy.Controllers
 
                 }
 
-                return View(results);
+                return View(new HomeViewModel {
+                    SearchId = searchId,
+                    SearchResults = results
+                });
             }
         }
 

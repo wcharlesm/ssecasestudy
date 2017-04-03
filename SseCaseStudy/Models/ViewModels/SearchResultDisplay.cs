@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SseCaseStudy.Models
+namespace SseCaseStudy.Models.ViewModels
 {
     public class SearchResultDisplay
     {

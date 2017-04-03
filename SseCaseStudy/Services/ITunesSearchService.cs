@@ -4,7 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RestSharp;
-using SseCaseStudy.Models;
+using SseCaseStudy.Models.ITunesSearchModels;
+using SseCaseStudy.Models.ViewModels;
 
 namespace SseCaseStudy.Services
 {
