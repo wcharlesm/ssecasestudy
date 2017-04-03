@@ -16,5 +16,7 @@ namespace SseCaseStudy.Models.EventModels
         public String SearchTerm { get; set; }
         public String Title { get; set; }
         public DateTime TimeStamp { get; set; }
+
+        public SearchEvent SearchEvent { get; set; }
     }
 }

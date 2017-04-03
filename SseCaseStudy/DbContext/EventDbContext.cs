@@ -18,8 +18,13 @@ namespace SseCaseStudy.DbContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<MediaItemClickEvent>().ToTable("MediaItemClickEvent");
-            modelBuilder.Entity<SearchEvent>().ToTable("SearchEvent");
+            modelBuilder.Entity<MediaItemClickEvent>()
+                .ToTable("MediaItemClickEvent")
+                .HasOne(m => m.SearchEvent)
+                .WithMany(s => s.MediaItemClickEvents)
+                .HasForeignKey(m => m.SearchId);
+
+            modelBuilder.Entity<SearchEvent>().ToTable("SearchEvent").HasKey(s => s.SearchId);
         }
     }
 }

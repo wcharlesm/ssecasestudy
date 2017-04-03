@@ -8,5 +8,6 @@ namespace SseCaseStudy.Models.ViewModels
     public class StatisticsViewModel
     {
         public ClickStatisticsViewModel ClickStatistics { get; set; }
+        public SearchStatisticsViewModel SearchStatistics { get; set; }
     }
 }

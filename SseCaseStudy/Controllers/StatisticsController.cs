@@ -16,10 +16,12 @@ namespace SseCaseStudy.Controllers
     public class StatisticsController : Controller
     {
         private IClickStatisticsService _clickStatisticsService;
+        private ISearchStatisticsService _searchStatisticsService;
 
-        public StatisticsController(IClickStatisticsService clickStatisticsService)
+        public StatisticsController(IClickStatisticsService clickStatisticsService, ISearchStatisticsService searchStatisticsService)
         {
             _clickStatisticsService = clickStatisticsService;
+            _searchStatisticsService = searchStatisticsService;
         }
 
         public IActionResult Index()
@@ -31,11 +33,16 @@ namespace SseCaseStudy.Controllers
                         { 2, _clickStatisticsService.ClickCountBySearchOrder(2) }
                     };
 
+
             return View(new StatisticsViewModel {
                 ClickStatistics = new ClickStatisticsViewModel {
                     TotalClicks = totalClicks,
                     ClicksBySearchOrder = clicksBySearchOrder,
                     LeftOverClicks = totalClicks - clicksBySearchOrder.Aggregate(0, (x, y) => x + y.Value)
+                },
+                SearchStatistics = new SearchStatisticsViewModel {
+                    TotalSearches = _searchStatisticsService.TotalSearches(),
+                    SearchesWithoutClicks = _searchStatisticsService.SearchesWithoutClicks()
                 }
             });
         }

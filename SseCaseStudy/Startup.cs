@@ -41,6 +41,7 @@ namespace SseCaseStudy
             services.AddTransient<IEventService, EventService>();
             services.AddTransient<IMediaSearchService, ITunesSearchService>();
             services.AddTransient<IClickStatisticsService, ClickStatisticsService>();
+            services.AddTransient<ISearchStatisticsService, SearchStatisticsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

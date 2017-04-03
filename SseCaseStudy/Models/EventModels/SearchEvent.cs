@@ -13,5 +13,7 @@ namespace SseCaseStudy.Models.EventModels
         public String SearchTerm { get; set; }
         public String SearchType { get; set; }
         public DateTime TimeStamp { get; set; }
+
+        public List<MediaItemClickEvent> MediaItemClickEvents { get; set; }
     }
 }

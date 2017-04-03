@@ -49,7 +49,7 @@ namespace SseCaseStudy.Controllers
                     TimeStamp = DateTime.Now
                 };
 
-                _eventService.RecordSearchEvent(searchEvent);
+                await _eventService.RecordSearchEvent(searchEvent);
 
                 List<SearchResultDisplay> results;
 
@@ -106,7 +106,7 @@ namespace SseCaseStudy.Controllers
             return QueryHelpers.AddQueryString("/Home/RedirectToITunes", parameters);
         }
 
-        public IActionResult RedirectToITunes(String itunesLink, String resourceId, String searchId, int searchOrder, String searchTerm, String title)
+        public async Task<IActionResult> RedirectToITunes(String itunesLink, String resourceId, String searchId, int searchOrder, String searchTerm, String title)
         {
             var userId = this.HttpContext.Request.Cookies["ssecasestudycookie"];
 
@@ -122,7 +122,7 @@ namespace SseCaseStudy.Controllers
                 TimeStamp = DateTime.Now
             };
 
-            _eventService.RecordMediaItemClickEvent(clickEvent);
+            await _eventService.RecordMediaItemClickEvent(clickEvent);
 
             return Redirect(itunesLink);
         }
