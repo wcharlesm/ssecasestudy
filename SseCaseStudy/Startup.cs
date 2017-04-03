@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RestSharp;
+using SseCaseStudy.DbContext;
 using SseCaseStudy.Services;
 
 namespace SseCaseStudy
@@ -32,13 +34,16 @@ namespace SseCaseStudy
             // Add framework services.
             services.AddMvc();
 
+            services.AddDbContext<EventDbContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("EventDbConnectionString")));
+
             services.AddTransient<IRestClient, RestClient>();
             services.AddTransient<IEventService, EventService>();
             services.AddTransient<IMediaSearchService, ITunesSearchService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, EventDbContext eventDbContext)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -61,6 +66,8 @@ namespace SseCaseStudy
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            EventDbInititalizer.Initialize(eventDbContext);
         }
     }
 }

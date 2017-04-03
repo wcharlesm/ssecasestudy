@@ -18,7 +18,7 @@ namespace SseCaseStudy.Models.ITunesSearchModels
         public String TrackName { get; set; }
         public String TrackPrice { get; set; }
         public String TrackViewUrl { get; set; }
-        public int TrackId { get; set; }
+        public String TrackId { get; set; }
 
     }
 }

@@ -2,23 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SseCaseStudy.DbContext;
 using SseCaseStudy.Models.EventModels;
 
 namespace SseCaseStudy.Services
 {
     public class EventService : IEventService
     {
+        private readonly EventDbContext _eventDbContext;
+
+        public EventService(EventDbContext eventDbContext) {
+            _eventDbContext = eventDbContext;
+        }
         public Task RecordSearchEvent(SearchEvent searchEvent)
         {
-            return null;
-            //throw new NotImplementedException();
+            _eventDbContext.SearchEvent.Add(searchEvent);
+            return _eventDbContext.SaveChangesAsync();
         }
 
-        public Task RecordSongClickEvent(SongClickEvent songClickEvent)
+        public Task RecordMediaItemClickEvent(MediaItemClickEvent mediaItemClickEvent)
         {
-
-            return null;
-            //throw new NotImplementedException();
+            _eventDbContext.MediaItemClickEvent.Add(mediaItemClickEvent);
+            return _eventDbContext.SaveChangesAsync();
         }
     }
 }

@@ -24,7 +24,7 @@ namespace SseCaseStudy.Services
             var results = await SearchITunes<SearchResult>(searchTerm, "movie");
 
             return results.Select(x => new SearchResultDisplay {
-                ResourseId = x.TrackId,
+                ResourceId = x.TrackId,
                 Title = x.TrackName,
                 Link = x.TrackViewUrl,
                 Price = $"${x.TrackPrice}",
@@ -38,7 +38,7 @@ namespace SseCaseStudy.Services
 
             return results.Select(x => new SearchResultDisplay
             {
-                ResourseId = x.TrackId,
+                ResourceId = x.TrackId,
                 Title = $"{x.TrackName} by {x.ArtistName}",
                 Link = x.TrackViewUrl,
                 Price = $"${x.TrackPrice}",
@@ -52,7 +52,7 @@ namespace SseCaseStudy.Services
 
             return results.Select(x => new SearchResultDisplay
             {
-                ResourseId = x.TrackId,
+                ResourceId = x.TrackId,
                 Title = x.TrackName,
                 Link = x.TrackViewUrl,
                 Price = x.FormattedPrice,
@@ -72,7 +72,7 @@ namespace SseCaseStudy.Services
 
             return results.Select(x => new SearchResultDisplay
             {
-                ResourseId = x.TrackId,
+                ResourceId = x.TrackId,
                 Title = $"{x.TrackName} by {x.ArtistName}",
                 Link = x.TrackViewUrl,
                 Price = $"${x.TrackPrice}",
@@ -86,7 +86,7 @@ namespace SseCaseStudy.Services
 
             return results.Select(x => new SearchResultDisplay
             {
-                ResourseId = x.TrackId,
+                ResourceId = x.TrackId,
                 Title = x.CollectionName,
                 Link = x.TrackViewUrl,
                 Price = $"${x.CollectionPrice}",

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using SseCaseStudy.ActionFilters;
 using SseCaseStudy.Models.EventModels;
 using SseCaseStudy.Models.ITunesSearchModels;
@@ -39,14 +40,16 @@ namespace SseCaseStudy.Controllers
             {
                 var searchId = Guid.NewGuid().ToString();
 
-                _eventService.RecordSearchEvent(new SearchEvent
+                var searchEvent = new SearchEvent
                 {
                     UserId = id,
                     SearchId = searchId,
                     SearchTerm = searchTerm,
                     SearchType = searchType,
                     TimeStamp = DateTime.Now
-                });
+                };
+
+                _eventService.RecordSearchEvent(searchEvent);
 
                 List<SearchResultDisplay> results;
 
@@ -78,6 +81,11 @@ namespace SseCaseStudy.Controllers
 
                 }
 
+                for (var i = 0; i < results.Count; i++)
+                {
+                    results[i].Link = RedirectUrl(results[i], searchId, searchTerm, i);
+                }
+
                 return View(new HomeViewModel {
                     SearchId = searchId,
                     SearchResults = results
@@ -85,11 +93,38 @@ namespace SseCaseStudy.Controllers
             }
         }
 
-        public IActionResult RedirectToITunes()
-        {
-            ViewData["Message"] = "Your application description page.";
+        private String RedirectUrl(SearchResultDisplay result, String searchId, String searchTerm, int searchOrder) {
+            var parameters = new Dictionary<String, String> {
+                {"itunesLink", result.Link },
+                {"resourceId", result.ResourceId },
+                {"searchId",  searchId },
+                {"searchOrder", searchOrder.ToString() },
+                {"searchTerm", searchTerm },
+                {"title", result.Title }
+            };
 
-            return View();
+            return QueryHelpers.AddQueryString("/Home/RedirectToITunes", parameters);
+        }
+
+        public IActionResult RedirectToITunes(String itunesLink, String resourceId, String searchId, int searchOrder, String searchTerm, String title)
+        {
+            var userId = this.HttpContext.Request.Cookies["ssecasestudycookie"];
+
+            var clickEvent = new MediaItemClickEvent
+            {
+                UserId = userId,
+                MediaId = resourceId,
+                MediaLink = itunesLink,
+                SearchId = searchId,
+                SearchTerm = searchTerm,
+                Title = title,
+                SearchOrder = searchOrder,
+                TimeStamp = DateTime.Now
+            };
+
+            _eventService.RecordMediaItemClickEvent(clickEvent);
+
+            return Redirect(itunesLink);
         }
 
 

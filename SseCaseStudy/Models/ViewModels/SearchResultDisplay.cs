@@ -7,7 +7,7 @@ namespace SseCaseStudy.Models.ViewModels
 {
     public class SearchResultDisplay
     {
-        public int ResourseId { get; set; }
+        public String ResourceId { get; set; }
         public String Title { get; set; }
         public String Link { get; set; }
         public String Price { get; set; }

@@ -9,6 +9,6 @@ namespace SseCaseStudy.Services
     public interface IEventService
     {
         Task RecordSearchEvent(SearchEvent searchEvent);
-        Task RecordSongClickEvent(SongClickEvent songClickEvent);
+        Task RecordMediaItemClickEvent(MediaItemClickEvent songClickEvent);
     }
 }
